@@ -6,30 +6,27 @@ import backtype.storm.StormSubmitter;
 import backtype.storm.spout.SpoutOutputCollector;
 import backtype.storm.task.OutputCollector;
 import backtype.storm.task.TopologyContext;
-import backtype.storm.testing.TestWordSpout;
 import backtype.storm.topology.OutputFieldsDeclarer;
 import backtype.storm.topology.TopologyBuilder;
-import backtype.storm.topology.base.BaseRichSpout;
 import backtype.storm.topology.base.BaseRichBolt;
+import backtype.storm.topology.base.BaseRichSpout;
 import backtype.storm.tuple.Fields;
 import backtype.storm.tuple.Tuple;
 import backtype.storm.tuple.Values;
 import backtype.storm.utils.Utils;
-
-import twitter4j.conf.ConfigurationBuilder;
-import twitter4j.TwitterStream;
-import twitter4j.TwitterStreamFactory;
+import com.lambdaworks.redis.RedisClient;
+import com.lambdaworks.redis.RedisConnection;
+import twitter4j.StallWarning;
 import twitter4j.Status;
 import twitter4j.StatusDeletionNotice;
 import twitter4j.StatusListener;
-import twitter4j.StallWarning;
+import twitter4j.TwitterStream;
+import twitter4j.TwitterStreamFactory;
+import twitter4j.conf.ConfigurationBuilder;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.LinkedBlockingQueue;
-
-import com.lambdaworks.redis.RedisClient;
-import com.lambdaworks.redis.RedisConnection;
 
 /**
  * This is a basic example of a Storm topology.
@@ -353,10 +350,10 @@ public class TweetTopology {
 
     // now create the tweet spout with the credentials
     TweetSpout tweetSpout = new TweetSpout(
-        //"[Your customer key]",
-        //"[Your secret key]",
-        //"[Your access token]",
-        //"[Your access secret]"
+        "[Your customer key]",
+        "[Your secret key]",
+        "[Your access token]",
+        "[Your access secret]"
     );
 
     // attach the tweet spout to the topology - parallelism of 1
